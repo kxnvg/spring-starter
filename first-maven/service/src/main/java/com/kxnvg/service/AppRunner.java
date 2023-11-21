@@ -8,4 +8,5 @@ public class AppRunner {
         UserService userService = new UserService();
         System.out.println(userService.getUser(25L));
     }
+
 }

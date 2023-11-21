@@ -5,10 +5,31 @@
     <parent>
         <groupId>com.kxnvg</groupId>
         <artifactId>first-maven</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>database</artifactId>
     <name>database</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.kxnvg</groupId>
+                <artifactId>hello-plugin</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>hello</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <message>Message from config!!!</message>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
