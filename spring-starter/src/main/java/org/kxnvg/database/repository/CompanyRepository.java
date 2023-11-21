@@ -7,6 +7,7 @@ import org.kxnvg.entity.Company;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
     @Override
     public Optional<Company> findById(Integer id) {
         log.info("findById method...");
-        return Optional.of(new Company(id));
+        return Optional.of(new Company(id, null, Collections.emptyMap()));
     }
 
     @Override

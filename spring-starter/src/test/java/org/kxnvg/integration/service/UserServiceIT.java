@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.kxnvg.UserService;
 import org.kxnvg.integration.annotation.IT;
 import org.kxnvg.database.ConnectionPool;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestConstructor;
 
 @IT
