@@ -1,4 +1,4 @@
-package org.kxnvg.service;
+package org.kxnvg;
 
 import lombok.RequiredArgsConstructor;
 import org.kxnvg.database.repository.CrudRepository;

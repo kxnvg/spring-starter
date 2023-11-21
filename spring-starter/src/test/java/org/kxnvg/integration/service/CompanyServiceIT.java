@@ -1,10 +1,10 @@
-package integration.service;
+package org.kxnvg.integration.service;
 
-import integration.service.annotation.IT;
+import org.kxnvg.CompanyService;
+import org.kxnvg.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.kxnvg.dto.CompanyReadDto;
-import org.kxnvg.service.CompanyService;
 import org.springframework.test.context.TestConstructor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

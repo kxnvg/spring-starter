@@ -6,7 +6,7 @@ import org.kxnvg.database.repository.CrudRepository;
 import org.kxnvg.dto.CompanyReadDto;
 import org.kxnvg.entity.Company;
 import org.kxnvg.listener.entity.EntityEvent;
-import org.kxnvg.service.CompanyService;
+import org.kxnvg.CompanyService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
