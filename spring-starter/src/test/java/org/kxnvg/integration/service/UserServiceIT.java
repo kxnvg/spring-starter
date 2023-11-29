@@ -2,7 +2,7 @@ package org.kxnvg.integration.service;
 
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.kxnvg.UserService;
+import org.kxnvg.service.UserService;
 import org.kxnvg.integration.annotation.IT;
 import org.kxnvg.database.ConnectionPool;
 import org.springframework.test.context.TestConstructor;

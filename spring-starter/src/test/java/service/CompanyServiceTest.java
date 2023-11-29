@@ -2,11 +2,11 @@ package service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kxnvg.database.repository.CrudRepository;
+import org.kxnvg.database.repository.CompanyRepository;
 import org.kxnvg.dto.CompanyReadDto;
 import org.kxnvg.entity.Company;
 import org.kxnvg.listener.entity.EntityEvent;
-import org.kxnvg.CompanyService;
+import org.kxnvg.service.CompanyService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,7 +24,7 @@ public class CompanyServiceTest {
     private static final Integer COMPANY_ID = 1;
 
     @Mock
-    private CrudRepository<Integer, Company> companyRepository;
+    private CompanyRepository companyRepository;
     @Mock
     private ApplicationEventPublisher eventPublisher;
     @InjectMocks

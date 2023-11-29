@@ -1,24 +1,25 @@
-package org.kxnvg;
+package org.kxnvg.service;
 
 import lombok.RequiredArgsConstructor;
-import org.kxnvg.database.repository.CrudRepository;
+import org.kxnvg.database.repository.CompanyRepository;
 import org.kxnvg.dto.CompanyReadDto;
 import org.kxnvg.entity.Company;
 import org.kxnvg.listener.entity.AccessType;
 import org.kxnvg.listener.entity.EntityEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyService {
 
-    private final CrudRepository<Integer, Company> companyRepository;
+    private final CompanyRepository companyRepository;
     private final ApplicationEventPublisher eventPublisher;
 
+    @Transactional
     public Optional<CompanyReadDto> findById(Integer id) {
         return companyRepository.findById(id)
                 .map(entity -> {

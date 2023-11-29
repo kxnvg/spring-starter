@@ -1,6 +1,6 @@
 package org.kxnvg.integration.service;
 
-import org.kxnvg.CompanyService;
+import org.kxnvg.service.CompanyService;
 import org.kxnvg.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
