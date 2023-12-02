@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ConnectionPool {
 
-    @Value("${database.username}")
+    @Value("${db.username}")
     private final String username;
-    @Value("${database.pool.size}")
+    @Value("${db.pool.size}")
     private final Integer poolSize;
 
     @PostConstruct

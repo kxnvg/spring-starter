@@ -1,4 +1,4 @@
-database:
+db:
   username: username
   password: pass
   driver: PostgresDriver
@@ -18,6 +18,15 @@ database:
       timeout: 2
     - size: 3
       timeout: 3
+
+logging:
+  level:
+    root: INFO
+    com.kxnvg.spring.database.pool: INFO
+    org.springframework.jdbc.core: TRACE
+
+
+spring.profiles.active: qa
 
 spring:
   datasource:

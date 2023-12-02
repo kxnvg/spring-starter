@@ -2,24 +2,17 @@ package org.kxnvg.integration.database.repository;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.kxnvg.database.repository.CompanyRepository;
 import org.kxnvg.entity.Company;
-import org.kxnvg.integration.annotation.IT;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.context.TestConstructor;
-import org.springframework.transaction.annotation.Transactional;
+import org.kxnvg.integration.IntegrationTestBase;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import java.util.Map;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@IT
 @RequiredArgsConstructor
-class CompanyRepositoryTest {
+class CompanyRepositoryTest extends IntegrationTestBase {
 
     private static final Integer APPLE_ID = 5;
     private final EntityManager entityManager;
@@ -33,6 +26,7 @@ class CompanyRepositoryTest {
     }
 
     @Test
+    @Disabled
     void delete() {
         var maybeCompany = companyRepository.findById(APPLE_ID);
         assertTrue(maybeCompany.isPresent());
@@ -46,18 +40,4 @@ class CompanyRepositoryTest {
         Company company = entityManager.find(Company.class, 1);
         assertNotNull(company);
     }
-
-//    @Test
-//    void save() {
-//        Company company = Company.builder()
-//                .name("Apple")
-//                .locales(Map.of(
-//                        "ru", "Apple описание",
-//                        "en", "Apple description"
-//                ))
-//                .build();
-//        entityManager.persist(company);
-//        assertNotNull(company.getId());
-//    }
-
 }

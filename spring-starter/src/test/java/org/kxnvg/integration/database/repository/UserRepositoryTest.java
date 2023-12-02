@@ -8,11 +8,10 @@ import org.kxnvg.dto.PersonalInfo2;
 import org.kxnvg.dto.UserFilter;
 import org.kxnvg.entity.Role;
 import org.kxnvg.entity.User;
-import org.kxnvg.integration.annotation.IT;
+import org.kxnvg.integration.IntegrationTestBase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.annotation.Commit;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,9 +19,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@IT
 @RequiredArgsConstructor
-class UserRepositoryTest {
+class UserRepositoryTest extends IntegrationTestBase {
 
     private final UserRepository userRepository;
 
@@ -39,7 +37,6 @@ class UserRepositoryTest {
     }
 
     @Test
-    @Commit
     void checkAuditing() {
         User ivan = userRepository.findById(1L).get();
         ivan.setBirthDate(ivan.getBirthDate().plusYears(1));

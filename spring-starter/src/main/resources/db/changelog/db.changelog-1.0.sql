@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset kxnvg:1
 CREATE TABLE IF NOT EXISTS company
 (
     id SERIAL PRIMARY KEY ,
