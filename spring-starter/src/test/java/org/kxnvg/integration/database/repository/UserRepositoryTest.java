@@ -3,6 +3,7 @@ package org.kxnvg.integration.database.repository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.kxnvg.database.repository.UserRepository;
+import org.kxnvg.dto.PersonalInfo;
 import org.kxnvg.dto.PersonalInfo2;
 import org.kxnvg.dto.UserFilter;
 import org.kxnvg.entity.Role;
@@ -24,6 +25,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
+
+    @Test
+    void checkBatch() {
+        List<User> users = userRepository.findAll();
+        userRepository.updateCompanyAndRole(users);
+    }
+
+    @Test
+    void checkJdbcTemplate() {
+        List<PersonalInfo> users = userRepository.findAllByCompanyIdAndRole(1, Role.USER);
+        assertTrue(users.size() == 1);
+    }
 
     @Test
     @Commit
