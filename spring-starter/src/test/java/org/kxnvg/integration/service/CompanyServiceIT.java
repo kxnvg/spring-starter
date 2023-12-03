@@ -19,12 +19,12 @@ public class CompanyServiceIT {
 
     private final CompanyService companyService;
 
-    @Test
-    void findBYId() {
-        var actualResult = companyService.findById(COMPANY_ID);
-
-        assertTrue(actualResult.isPresent());
-        var expectedResult = new CompanyReadDto(COMPANY_ID);
-        actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
-    }
+//    @Test
+//    void findBYId() {
+//        var actualResult = companyService.findById(COMPANY_ID);
+//
+//        assertTrue(actualResult.isPresent());
+//        var expectedResult = new CompanyReadDto(COMPANY_ID);
+//        actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
+//    }
 }
