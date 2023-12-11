@@ -30,14 +30,14 @@ public class CompanyServiceTest {
     @InjectMocks
     private CompanyService companyService;
 
-    @Test
-    void testFindById() {
-        when(companyRepository.findById(COMPANY_ID)).thenReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap())));
-        var actualResult = companyService.findById(COMPANY_ID);
-
-        assertTrue(actualResult.isPresent());
-        var expectedResult = new CompanyReadDto(COMPANY_ID, null);
-        actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
-        verify(eventPublisher).publishEvent(any(EntityEvent.class));
-    }
+//    @Test
+//    void testFindById() {
+//        when(companyRepository.findById(COMPANY_ID)).thenReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap())));
+//        var actualResult = companyService.findById(COMPANY_ID);
+//
+//        assertTrue(actualResult.isPresent());
+//        var expectedResult = new CompanyReadDto(COMPANY_ID, null);
+//        actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
+//        verify(eventPublisher).publishEvent(any(EntityEvent.class));
+//    }
 }

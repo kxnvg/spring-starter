@@ -1,0 +1,5 @@
+ALTER TABLE users
+    ADD COLUMN image VARCHAR(64);
+
+ALTER TABLE users_aud
+    ADD COLUMN image VARCHAR(64);

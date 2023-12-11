@@ -7,6 +7,7 @@ import lombok.experimental.FieldNameConstants;
 import org.kxnvg.entity.Role;
 import org.kxnvg.validation.UserInfo;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -29,4 +30,6 @@ public class UserCreateEditDto {
     Role role;
 
     Integer companyId;
+
+    MultipartFile image;
 }
