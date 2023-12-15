@@ -4,22 +4,30 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.kxnvg.database.repository.UserRepository;
 import org.kxnvg.dto.UserCreateEditDto;
+import org.kxnvg.dto.UserFilter;
 import org.kxnvg.dto.UserReadDto;
 import org.kxnvg.entity.User;
 import org.kxnvg.mapper.UserCreateEditMapper;
 import org.kxnvg.mapper.UserReadMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.support.QuerydslJpaPredicateExecutor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final UserReadMapper userReadMapper;
@@ -84,5 +92,18 @@ public class UserService {
         if (!image.isEmpty()) {
             imageService.upload(image.getOriginalFilename(), image.getInputStream());
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .map(user -> {
+                     return new org.springframework.security.core.userdetails.User(
+                            user.getUsername(),
+                            user.getPassword(),
+                            Collections.singleton(user.getRole())
+                    );
+                })
+                .orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
     }
 }

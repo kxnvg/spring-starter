@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.history.RevisionRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -46,4 +47,6 @@ public interface UserRepository extends
             "FROM users WHERE company_id = :companyId",
             nativeQuery = true)
     List<PersonalInfo2> findAllByCompanyId(Integer companyId);
+
+    Optional<User> findByUsername(String username);
 }

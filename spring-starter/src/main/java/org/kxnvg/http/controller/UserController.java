@@ -1,11 +1,18 @@
 package org.kxnvg.http.controller;
 
+import jakarta.validation.groups.Default;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.kxnvg.dto.UserCreateEditDto;
+import org.kxnvg.dto.UserFilter;
+import org.kxnvg.dto.UserReadDto;
 import org.kxnvg.entity.Role;
 import org.kxnvg.service.CompanyService;
 import org.kxnvg.service.UserService;
+import org.postgresql.util.LruCache;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +37,7 @@ public class UserController {
     private final CompanyService companyService;
 
     @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("users", userService.findAll());
+    public String findAll() {
         return "user/users";
     }
 
@@ -48,8 +54,8 @@ public class UserController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public String create(@ModelAttribute @Validated UserCreateEditDto user,
+//    @ResponseStatus(HttpStatus.CREATED)
+    public String create(@ModelAttribute @Validated({Default.class, LruCache.CreateAction.class}) UserCreateEditDto user,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -57,7 +63,8 @@ public class UserController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/users/registration";
         }
-        return "redirect:/users/" + userService.create(user).getId();
+        userService.create(user);
+        return "redirect:/login";
     }
 
     //    @PutMapping("/{id")
