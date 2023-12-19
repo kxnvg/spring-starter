@@ -2,6 +2,7 @@ package org.kxnvg.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.kxnvg.database.querydsl.QPredicates;
 import org.kxnvg.database.repository.UserRepository;
 import org.kxnvg.dto.UserCreateEditDto;
 import org.kxnvg.dto.UserFilter;
@@ -12,6 +13,8 @@ import org.kxnvg.mapper.UserReadMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslJpaPredicateExecutor;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,6 +36,11 @@ public class UserService implements UserDetailsService {
     private final UserReadMapper userReadMapper;
     private final UserCreateEditMapper userCreateEditMapper;
     private final ImageService imageService;
+
+    public Page<UserReadDto> findAll(UserFilter filter, Pageable pageable) {
+        return userRepository.findAll(pageable)
+                .map(userReadMapper::map);
+    }
 
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
@@ -76,6 +84,7 @@ public class UserService implements UserDetailsService {
 
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional
     public boolean delete(Long id) {
         return userRepository.findById(id)

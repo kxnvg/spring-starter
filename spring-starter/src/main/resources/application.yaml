@@ -50,7 +50,23 @@ spring:
           batch_size: 50
           fetch_size: 10
     open-in-view: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 306416224059-og7stv5oqnr1va1kbhuai1rj6etan4do.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            scope: openid,email,profile
+
 
 springdoc:
   api-docs:
     path : /api-docs
+  swagger-ui:
+    oauth:
+      client-id: 306416224059-og7stv5oqnr1va1kbhuai1rj6etan4do.apps.googleusercontent.com
+      client-secret: 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
+      scopes: openid,email,profile
+    oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html

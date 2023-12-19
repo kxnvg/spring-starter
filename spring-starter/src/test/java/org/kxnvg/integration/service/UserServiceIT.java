@@ -7,6 +7,7 @@ import org.kxnvg.dto.UserReadDto;
 import org.kxnvg.entity.Role;
 import org.kxnvg.integration.IntegrationTestBase;
 import org.kxnvg.service.UserService;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,48 +36,52 @@ public class UserServiceIT extends IntegrationTestBase {
         maybeUser.ifPresent(user -> assertEquals("ivan@gmail.com", user.getUsername()));
     }
 
-//    @Test
-//    void testCreate() {
-//        UserCreateEditDto userDto = new UserCreateEditDto(
-//                "test@gmail.com",
-//                LocalDate.now(),
-//                "Test",
-//                "Test",
-//                Role.ADMIN,
-//                COMPANY_1
-//        );
-//        UserReadDto actualResult = userService.create(userDto);
-//
-//        assertEquals(userDto.getUsername(), actualResult.getUsername());
-//        assertEquals(userDto.getBirthDate(), actualResult.getBirthDate());
-//        assertEquals(userDto.getFirstname(), actualResult.getFirstname());
-//        assertEquals(userDto.getLastname(), actualResult.getLastname());
-//        assertEquals(userDto.getCompanyId(), actualResult.getCompany().id());
-//        assertSame(userDto.getRole(), actualResult.getRole());
-//    }
-//
-//    @Test
-//    void testUpdate() {
-//        UserCreateEditDto userDto = new UserCreateEditDto(
-//                "test@gmail.com",
-//                LocalDate.now(),
-//                "Test",
-//                "Test",
-//                Role.ADMIN,
-//                COMPANY_1
-//        );
-//        Optional<UserReadDto> actualResult = userService.update(USER_1, userDto);
-//
-//        assertTrue(actualResult.isPresent());
-//        actualResult.ifPresent(user -> {
-//            assertEquals(userDto.getUsername(), user.getUsername());
-//            assertEquals(userDto.getBirthDate(), user.getBirthDate());
-//            assertEquals(userDto.getFirstname(), user.getFirstname());
-//            assertEquals(userDto.getLastname(), user.getLastname());
-//            assertEquals(userDto.getCompanyId(), user.getCompany().id());
-//            assertSame(userDto.getRole(), user.getRole());
-//        });
-//    }
+    @Test
+    void testCreate() {
+        UserCreateEditDto userDto = new UserCreateEditDto(
+                "test@gmail.com",
+                "test",
+                LocalDate.now(),
+                "Test",
+                "Test",
+                Role.ADMIN,
+                COMPANY_1,
+                new MockMultipartFile("test", new byte[0])
+        );
+        UserReadDto actualResult = userService.create(userDto);
+
+        assertEquals(userDto.getUsername(), actualResult.getUsername());
+        assertEquals(userDto.getBirthDate(), actualResult.getBirthDate());
+        assertEquals(userDto.getFirstname(), actualResult.getFirstname());
+        assertEquals(userDto.getLastname(), actualResult.getLastname());
+        assertEquals(userDto.getCompanyId(), actualResult.getCompany().id());
+        assertSame(userDto.getRole(), actualResult.getRole());
+    }
+
+    @Test
+    void testUpdate() {
+        UserCreateEditDto userDto = new UserCreateEditDto(
+                "test@gmail.com",
+                "test",
+                LocalDate.now(),
+                "Test",
+                "Test",
+                Role.ADMIN,
+                COMPANY_1,
+                new MockMultipartFile("test", new byte[0])
+        );
+        Optional<UserReadDto> actualResult = userService.update(USER_1, userDto);
+
+        assertTrue(actualResult.isPresent());
+        actualResult.ifPresent(user -> {
+            assertEquals(userDto.getUsername(), user.getUsername());
+            assertEquals(userDto.getBirthDate(), user.getBirthDate());
+            assertEquals(userDto.getFirstname(), user.getFirstname());
+            assertEquals(userDto.getLastname(), user.getLastname());
+            assertEquals(userDto.getCompanyId(), user.getCompany().id());
+            assertSame(userDto.getRole(), user.getRole());
+        });
+    }
 
     @Test
     void testDelete() {

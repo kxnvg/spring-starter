@@ -55,8 +55,8 @@ public class FilterUserRepositoryImpl implements FilterUserRepository {
         if (filter.lastname() != null) {
             predicates.add(cb.like(user.get("lastname"), filter.lastname()));
         }
-        if (filter.birtDate() != null) {
-            predicates.add(cb.lessThan(user.get("birthDate"), filter.birtDate()));
+        if (filter.birthDate() != null) {
+            predicates.add(cb.lessThan(user.get("birthDate"), filter.birthDate()));
         }
 
         criteria.where(predicates.toArray(Predicate[]::new));
