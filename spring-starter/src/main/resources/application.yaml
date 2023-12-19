@@ -59,6 +59,8 @@ spring:
             client-secret: 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
             redirect-uri: http://localhost:8080/login/oauth2/code/google
             scope: openid,email,profile
+  messages:
+    basename: messages
 
 
 springdoc:
